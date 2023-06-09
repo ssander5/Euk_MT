@@ -42,17 +42,20 @@ for f in ./bbmap/*1.trimclean.sickleclean.spikeclean.hostclean.fq; do
     ref=../Reference/smr_v4.3_default_db.fasta \
     out=${base}1.final.clean.fq \
     out2=${base}2.final.clean.fq \
-    outm=${base}reads_that_match_rRNA.fq | \
-    awk '{print "HOST CONTAMINATION SEQUENCES PAIRED "$0}' | \
-    tee -a ./bbmap/$(basename ${base}stats.txt)
+    outm=${base}reads_that_match_rRNA.fq 2>&1 >/dev/null | \
+    awk '{print "RNA CONTAMINATION SEQUENCES PAIRED "$0}' | \
+    tee -a ./${base}stats.txt
 
     #bbduk for unpaired
     bbduk.sh \
     threads=8 \
-    in=${base}unpaired.trimclean.sickleclean.fq \
+    in=${base}unpaired.trimclean.sickleclean.spikeclean.hostclean.fq \
     k=31 \
     out1=${base}u.clean.fq \
     minlength=60
+    outm=${base}reads_that_match_rRNA_unpaired.fq 2>&1 >/dev/null | \
+    awk '{print "RNA CONTAMINATION SEQUENCES UNPAIRED "$0}' | \
+    tee -a ./${base}stats.txt
 
    echo "Merging files"
    echo "Running bbmerge"
@@ -63,9 +66,9 @@ for f in ./bbmap/*1.trimclean.sickleclean.spikeclean.hostclean.fq; do
        out=${base}merged.final.clean.fq \
        outu1=${base}1.unmerged.final.clean.fq \
        outu2=${base}2.unmerged.final.clean.fq \
-       mininsert=60 | \
-       awk '{print "MERGED "$0}'  \
-       > ./${base}stats.txt
+       mininsert=60 2>&1 >/dev/null | \
+       awk '{print "MERGED "$0}' | \
+       tee -a ./${base}stats.txt
 
     echo "Reformating for diamond"
 
@@ -79,16 +82,18 @@ for f in ./bbmap/*1.trimclean.sickleclean.spikeclean.hostclean.fq; do
 
     /home/sheri/local/miniconda3/envs/champion/bin/reformat.sh \
     threads=16 \
-    in=${base}u.final.clean.fq \
-    > ./${base}stats.txt
+    in=${base}u.final.clean.fq 2>&1 >/dev/null | \
+    awk '{print "UNPAIRED "$0}' | \
+    tee -a ./${base}stats.txt
 
     /home/sheri/local/miniconda3/envs/champion/bin/reformat.sh \
     threads=16 \
     in1=${base}1.unmerged.final.clean.fq \
-    in2=${base}2.unmerged.final.clean.fq | \
-    awk '{print "PAIRED "$0}' \
-    > ./${base}stats.txt
+    in2=${base}2.unmerged.final.clean.fq 2>&1 >/dev/null | \
+    awk '{print "PAIRED "$0}' | \
+    tee -a ./${base}stats.txt
 
 done
 
 echo "DONE Removing rRNA contamination using SortMeRNA database in bbduk!"
+

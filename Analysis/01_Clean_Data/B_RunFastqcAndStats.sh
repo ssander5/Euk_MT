@@ -20,7 +20,7 @@ else
     mkdir fastqc
 fi
 
-for g in ../00_Input_Data/; do
+for g in ../00_Input_Data/*; do
       fastqc -o ./fastqc $g
 done
 
@@ -32,9 +32,15 @@ else
     mkdir bbmap
 fi
 
-for g in ../../Input_data/*fastq; do
-    o=${g#../../Input_data/}
-    reformat.sh threads=16 in=$g > ./bbmap/${o%_1*}.stats.txt
+for g in ../00_Input_Data/*gz; do
+    gzip -d $f
+done
+
+
+for g in ../00_Input_Data/*_1*fastq*; do
+
+    o=${g#../00_Input_Data/}
+    reformat.sh threads=16 in=$g in2=${g%_1*}_2.fastq.gz out=stdout.fq 2>&1 >/dev/null | awk '{print "RAW READS "$0}' | tee -a ./bbmap/${o%_1*}.stats.txt
 done
 
 echo "DONE Running FastQC and Generating Stats!"
