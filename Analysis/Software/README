@@ -1,0 +1,47 @@
+00
+
+01
+Trimmomatic
+Sickle
+Fastqc
+BBMap
+BBstats
+
+04
+Trinity
+MegaHit
+IDBA-MTP
+
+05
+cdhit
+
+06
+Quast
+MetaQuast
+Transrate
+BUSCO
+    metaeuk -> wget https://mmseqs.com/metaeuk/metaeuk-linux-avx2.tar.gz; tar xzvf metaeuk-linux-avx2.tar.gz; export PATH=$(pwd)/metaeuk/bin/:$PATH
+
+07
+MaxBin
+MetaBat
+Binrefiner
+
+08
+Kraken2
+Bracken
+Krona
+
+09
+Eukelele
+emapper
+diamond
+kegg
+signalp
+tmhmm
+uniprot
+
+10
+edgeR/DESeq
+tar xfv 2.1.tar.gz
+rm 2.1.tar.gz

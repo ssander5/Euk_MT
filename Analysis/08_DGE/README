@@ -1,0 +1,3 @@
+Salmon → EdgeR/DESeq2 → visualization → merge annotation
+(if prokaryotic genome available, Edge-Pro for DE)
+Outputs: DGE visualization, counts, stats, MA plots, etc.

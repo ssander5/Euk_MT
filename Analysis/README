@@ -1,0 +1,5 @@
+Quast, or
+MetaQuast, or
+Transrate;
+BUSCO
+Outputs: Assembly.$assembler.clean.stats, BUSCO.txt

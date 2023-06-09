@@ -1,0 +1,12 @@
+cdhit100 → transdecoder → cd-hit98 → salmon quant
+Outputs: Assembly.$assembler.clean.fa
+
+
+PATHs TO INCLUDE for Transdecoder:
+/mnt/sdb/Euk_MT/Analysis/Software/hmmer-3.3.2/bin/
+/mnt/sdb/Euk_MT/Analysis/Software/TransDecoder
+
+Transdecoder
+cd-hit
+cd-hit-est
+subset_fasta.pl

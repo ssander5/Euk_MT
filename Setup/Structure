@@ -1,0 +1,95 @@
+.Euk_MT
+├── Analysis						Main Computational Folder
+│   ├── 00_Input_Data					Raw input data
+│   │   ├── HN009_subsampled_1.fastq.gz
+│   │   ├── HN009_subsampled_2.fastq.gz
+│   │   ├── HN016_subsampled_1.fastq.gz
+│   │   ├── HN016_subsampled_2.fastq.gz
+│   │   ├── HN036_subsampled_1.fastq.gz
+│   │   ├── HN036_subsampled_2.fastq.gz
+│   │   ├── HN043_subsampled_1.fastq.gz
+│   │   └── HN043_subsampled_2.fastq.gz
+│   ├── 01_Clean_Data					####QC step####
+│   │   ├── adapters.fa
+│   │   ├── A_RunCheck.sh				A) TBD, for software checks
+│   │   ├── bbmap					D, E, and F output
+│   │   ├── B_RunFastqcAndStats.sh			B) Initial Fastqc on raw data, initiation of stats file 
+│   │   ├── C_RunTrimmomaticandSickle.sh		C) Trims the data with both trimmomatic and sickle for completeness
+│   │   ├── D_RunRemoveSpike.sh				D) Optional: remove phiX (or other) spike in
+│   │   ├── D_skip.sh					D) Optional: to skip D without confusing the next step
+│   │   ├── E_RunRemoveHost.sh				E) Optional: remove host or known contaminant DNA
+│   │   ├── E_skip.sh					E) Optional: to skip E without confusing the next step
+│   │   ├── fastqc					B output
+│   │   ├── final_QC_output				H output
+│   │   ├── F_RunRemoveRNA.sh				F) Optional: remove rRNA (recommended even if depleted)
+│   │   ├── F_skip.sh					F) Optional: to skip F without confusing the next step
+│   │   ├── G_RunStats.sh				G) Generate QC statistics for the cleaned reads
+│   │   ├── H_CopyResults.sh				H) Copy the final cleaned versions into a single location
+│   │   ├── README					Instructions
+│   │   ├── sickle					C output
+│   │   └── trimmomatic					C output
+│   ├── 02_EukMT_Assembly				####Assembly Step####
+│   │   ├── B_RunIDBA-MTP.sh				B) Optional: TBD
+│   │   ├── B_RunMegahit.sh				B) Optional: Assembly with Megahit
+│   │   ├── B_RunTrinity.sh				B) Optional: Assembly with Trinity
+│   │   ├── megahit					B output
+│   │   ├── README					Instructions
+│   │   └── trinity					B output
+│   ├── 03_Process_MT_Assembly				###Combine and Deduplicate Transcriptome
+│   │   ├── Assembly.clean.fa				C output - cleaned assembly
+│   │   ├── B_RunMerge.sh				B) Merge output from 02_EukMT_Assembly
+│   │   ├── clustering100				output of cd-hit clustering for redundancy
+│   │   ├── clustering98				ouptut of cd-hit clustering for ~isoforms
+│   │   ├── combined.fa					B output
+│   │   ├── combined.fa.transdecoder_dir		B transdecoder output
+│   │   ├── C_RunFilter.sh				C) Filter out tiny contigs and rename
+│   │   └── README					Instructions
+│   ├── 04_Assembly_QC					###Quality Assessment of Clean Assembly
+│   │   ├── B_RunBUSCO.sh				B) Optional: Compute BUSCO (default: euk)
+│   │   ├── B_RunQuast.sh				B) Optional: Run QUAST statistics
+│   │   ├── busco_1510413.log				busco output
+│   │   ├── busco_downloads				busco databases
+│   │   ├── quast_results				quast output
+│   │   ├── README					Instructions
+│   │   ├── RunMetaQuast				TBD
+│   │   ├── RunTransrate				TBD
+│   ├── 05_Binning					###Binning Metatranscriptome Assembly
+│   │   ├── binning					C,D output
+│   │   ├── bin_refinement				E output
+│   │   ├── B_RunCoverage.sh				B) compute coverage of clean assembly for C
+│   │   ├── checkM					E output
+│   │   ├── coverage					B output
+│   │   ├── C_RunMaxbin.sh				C) Bin with Maxbin
+│   │   ├── D_RunMetabat.sh				D) Bin with Metabat
+│   │   ├── E_RunBinRefiner.sh				E) Combined and refine bins
+│   │   └── README					Instructions
+│   ├── 06_Visualization				###Visualization Step - In Progress
+│   │   ├── README					Instructions
+│   │   ├── B_RunKraken					B) Optional: Kraken2 taxonomy prediction
+│   │   ├── C_RunBracken				C) Optional: Bracken quantification of Kraken output
+│   │   ├── D_RunKrona					D) Optional: Visualize Kraken/Bracken output
+│   │   └── E_RunAnvio					E) Optional: Visualize refined bins with Anvio
+│   ├── 07_Annotation					###Annotation with Eukelele - Just Started
+│   │   ├── README					Instructions
+│   │   └── RunEukelele					TBD
+│   ├── 08_DGE						###Differential Gene Expression Analsys
+│   │   ├── README					Instructions
+│   │   ├── RunDGE					TBD
+│   │   └── RunSalmon					TBD
+│   ├── README						General Instructions
+│   ├── Reference					###Reference databases go here - they are not listed here
+│   └── Software					###local/bin
+│       ├── busco-5.4.5
+│       ├── hmmer-3.3.2
+│       ├── MaxBin-2.2.7
+│       ├── metaeuk
+│       ├── README
+│       ├── salmon-latest_linux_x86_64
+│       ├── subset_fasta.pl
+│       └── TransDecoder
+├── Input						Default place to put data, which is linked into 00_Read_Data, allowing for multiple samples run in Analysis1, Analsys2, etc
+├── NOTES						NOTES as we do testing, etc
+├── Output						TBD - central location for major output
+├── README						Instructions
+├── Resources						TBD - citations for software, etc
+└── Setup						TBD - last step, automation handling for paths, jobs, etc
