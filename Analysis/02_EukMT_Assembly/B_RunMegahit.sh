@@ -28,4 +28,4 @@ echo "Running megahit"
    -t 16 \
    --presets meta-large \
    --mem-flag 2 \
-   -o ./megahit/${f}
+   -o ./megahit/
