@@ -23,9 +23,9 @@ echo "SKIPPING Removing host contamination and generating stats using BBMAP"
 
 for g in ./bbmap/*1.trimclean.sickleclean.spikeclean.fq; do
 
-    cp $g ${g%1.trim*}1.trimclean.sickleclean.spikeclean.hostclean.fq
-    cp $g ${g%1.trim*}2.trimclean.sickleclean.spikeclean.hostclean.fq
-    cp $g ${g%1.trim*}unpaired.trimclean.sickleclean.spikeclean.hostclean.fq
+    cp ${g} ${g%1.trim*}1.trimclean.sickleclean.spikeclean.hostclean.fq
+    cp ${g%1.trim*}2.trimclean.sickleclean.spikeclean.fq ${g%1.trim*}2.trimclean.sickleclean.spikeclean.hostclean.fq
+    cp ${g%1.trim*}unpaired.trimclean.sickleclean.spikeclean.fq ${g%1.trim*}unpaired.trimclean.sickleclean.spikeclean.hostclean.fq
 
     echo "SKIPPING HOST CONTAMINATION SEQUENCE REMOVAL" >> ./bbmap/$(basename ${g%1.trim*}stats.txt)
 done
