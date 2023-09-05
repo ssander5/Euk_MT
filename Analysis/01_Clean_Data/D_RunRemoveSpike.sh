@@ -5,7 +5,7 @@
 #SBATCH -o %j.txt
 #SBATCH -e %j.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=sheri.anne.sanders@gmail.com
+#SBATCH --mail-user=
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
 #SBATCH --ntasks-per-node=1
