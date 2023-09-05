@@ -5,7 +5,7 @@
 #SBATCH -o %j.txt
 #SBATCH -e %j.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=sheri.anne.sanders@gmail.com
+#SBATCH --mail-user=
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
 #SBATCH --ntasks-per-node=1
@@ -29,6 +29,14 @@ if [[ $(which megahit) ]]; then
    echo ".....Megahit is FOUND"
 else
    echo ".....Megahit is missing"
+   READY=0
+fi
+
+echo "Checking for SPAdes"
+if [[ $(which spades.py) ]]; then
+   echo ".....SPAdes is FOUND"
+else
+   echo ".....SPAdes is missing"
    READY=0
 fi
 
