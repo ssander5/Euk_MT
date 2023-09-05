@@ -16,13 +16,10 @@ out=final_assembly
 
 
 
-cat megahit/megahit_final_1000_filtered.fasta | sed 's/>/>megahit_filtered_' > final.assembly.fasta
+cat megahit.100cluster.fasta | sed 's/>/>megahit_filtered_' > final.assembly.fasta
 
+cat trinity.100cluster.fasta | sed 's/>/trinity_filtered_/g' >> final.assembly.fasta
 
-cat trinity/Trinity_1000_filtered.fasta | sed 's/>/trinity_filtered_/g' >> final.assembly.fasta
+cat rna_spades.100cluster.fasta | sed 's/>/>rnaspades_filtered_/g' >> final.assembly.fasta
 
-
-cat spades/rna_contigs_1000_filtred.fasta | sed 's/>/>rnaspades_filtered_/g' >> final.assembly.fasta
-
-
-cat spades-meta/meta-contigs_filtered.fasta | sed 's/>/>metaspades_filtered_/g' >> final.assembly.fasta
+cat meta_spades.100cluster.fasta | sed 's/>/>metaspades_filtered_/g' >> final.assembly.fasta
