@@ -1,11 +1,15 @@
 #!/bin/bash
 
-#$ -M sheri.anne.sanders@gmail.com
-#$ -m abe
-#$ -q debug
-#$ -N RunAll_D2
-
-#make output folder
+#SBATCH -J RunAssembly_B
+#SBATCH -p RM-shared
+#SBATCH -o %j.txt
+#SBATCH -e %j.err
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=2
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=05:00:00
 
 echo "Running megahit"
 
