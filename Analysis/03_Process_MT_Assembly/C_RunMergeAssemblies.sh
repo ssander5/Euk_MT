@@ -10,11 +10,6 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=05:00:00
-mem=100
-threads=24
-out=final_assembly
-
-
 
 cat megahit.100cluster.fasta | sed 's/>/>megahit_filtered_' > final.assembly.fasta
 
